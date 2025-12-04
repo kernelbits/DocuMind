@@ -1,3 +1,6 @@
 db 
 data 
 venv
+__pycache__
+.chainlit
+chainlit.md 

@@ -40,4 +40,5 @@ def create_vector_db():
     )
     print(f"Success Database saved to {DB_PATH}")
 
-create_vector_db()
+if __name__ == "__main__":
+    create_vector_db()
