@@ -1,15 +1,8 @@
-from qdrant_client import QdrantClient
-from dotenv import load_dotenv
-import os 
+# Connecting to database and managing data
+import chromadb
+from chromadb.config import Settings
 
 
-load_dotenv()
-QDRANT_URL= os.getenv('QDRANT_URL')
-QDRANT_API = os.getenv('QDRANT_API_KEY')
 
-qdrant_client = QdrantClient(
-    url=QDRANT_URL,
-    api_key=QDRANT_API
-)
-
-print(qdrant_client.get_collections())
+db_client = chromadb.PersistentClient(path="./chromadb")
+collection = db_client.get_or_create_collection("pdf_docs")

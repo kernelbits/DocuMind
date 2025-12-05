@@ -5,3 +5,4 @@ __pycache__
 .chainlit
 chainlit.md 
 .env
+chromadb
