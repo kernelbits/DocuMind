@@ -1,7 +1,7 @@
 # Pdf Reading and Storing in Database 
 
 from pypdf import PdfReader
-
+from sentence_transformers import SentenceTransformer
 
 def read_pdf(path):
     try:
@@ -38,8 +38,21 @@ def chunk_text(text: str,chunk_size=600,overlap=50):
         start += chunk_size - overlap 
     return chunks 
 
+def embedding(chunks):
+    try:
+        embed_model = SentenceTransformer("all-MiniLM-L6-v2")
+        embeddings = embed_model.encode(chunks)
+    except Exception as e:
+        raise Exception(f"Error : {e}")
+        print(f"Error type : {type(e).__name__}")
+
+    return embeddings
+
 
 pdf = read_pdf("./data/norse.pdf")
 print(pdf[100:])
 chunks = chunk_text(pdf)
 print(len(chunks))
+embeddings = embedding(chunks)
+print(embeddings.shape)
+print(embeddings[0].tolist())
