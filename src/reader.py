@@ -25,6 +25,11 @@ def chunk_text(text: str,chunk_size=600,overlap=50):
         raise ValueError("Text must be a string ")
     if not isinstance(chunk_size,int) and isinstance(overlap,int):
         raise ValueError("chunk_size and overlap must be integers ")
+    if chunk_size <= 0:
+        raise ValueError("chunk_size must be positive")
+    if overlap < 0 or overlap >= chunk_size:
+        raise ValueError("overlap must be between 0 and chunk_size - 1")
+
     chunks = []
     start = 0
     while start < len(text):
