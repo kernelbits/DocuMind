@@ -11,7 +11,9 @@ class PDFProcessor:
         text = self.reader.read(path)
         chunks = self.chunker.chunk(text)
         embeddings = self.embedder.encode(chunks)
+        embeddings = [e.tolist() for e in embeddings]
         return chunks, embeddings
 
     def embed_query(self, query: str):
-        return self.embedder.encode([query])
+        emb =  self.embedder.encode([query])
+        return emb[0].tolist()
