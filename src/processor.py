@@ -7,7 +7,6 @@ class PDFProcessor:
         self.embedder = Embedder()
 
     def process_pdf(self, path: str):
-        """Read → Chunk → Embed."""
         text = self.reader.read(path)
         chunks = self.chunker.chunk(text)
         embeddings = self.embedder.encode(chunks)

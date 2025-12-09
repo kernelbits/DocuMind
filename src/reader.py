@@ -3,7 +3,6 @@ from sentence_transformers import SentenceTransformer
 
 
 class PDFReader:
-    """Reads a PDF and extracts text."""
     def read(self, path: str) -> str:
         try:
             reader = PdfReader(path)
@@ -25,7 +24,6 @@ class PDFReader:
 
 
 class TextChunker:
-    """Splits large text into overlapping chunks."""
     def chunk(self, text: str, chunk_size=600, overlap=50):
         if not isinstance(text, str):
             raise ValueError("Text must be a string")
@@ -47,7 +45,6 @@ class TextChunker:
 
 
 class Embedder:
-    """Embeds text chunks using SentenceTransformer."""
     def __init__(self, model_name="all-MiniLM-L6-v2"):
         self.model = SentenceTransformer(model_name)
 

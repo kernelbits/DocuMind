@@ -1,4 +1,3 @@
-# Connecting to database and managing data
 import chromadb
 from chromadb.config import Settings
 

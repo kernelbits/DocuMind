@@ -8,3 +8,8 @@ chainlit.md
 chromadb
 .files 
 uploads
+logs/
+*.log
+.DS_Store
+*.pyc
+*.pyo

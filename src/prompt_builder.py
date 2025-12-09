@@ -1,9 +1,4 @@
 def build_prompt(user_query: str, context: str = None) -> list:
-    """
-    Build messages list for the model.
-    System message is strict: use ONLY the provided context, do not guess or use external knowledge.
-    When answering, cite source chunk numbers used like: (Source: 1, 3)
-    """
     system = (
         "You are a helpful assistant. IMPORTANT: Use ONLY the information provided in the PDF Context. "
         "Do NOT use outside knowledge or guess. If the answer is not present in the provided context, reply: "
