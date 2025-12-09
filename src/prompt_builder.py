@@ -1,17 +1,22 @@
 def build_prompt(user_query: str, context: str = None) -> list:
-    sys_prompt = "You are a helpful assistant. Use provided context if relevant, otherwise answer from your knowledge."
-    
-    if context and context.strip(): 
-        user_prompt = f"""PDF Context:
-{context}
+    """
+    Build messages list for the model.
+    System message is strict: use ONLY the provided context, do not guess or use external knowledge.
+    When answering, cite source chunk numbers used like: (Source: 1, 3)
+    """
+    system = (
+        "You are a helpful assistant. IMPORTANT: Use ONLY the information provided in the PDF Context. "
+        "Do NOT use outside knowledge or guess. If the answer is not present in the provided context, reply: "
+        "'I cannot find an answer in the provided documents.' Be concise and conversational. "
+        "When you use information from the context, include the source chunk numbers in parentheses, e.g. (Source: 1, 2)."
+    )
 
----
-
-User Question: {user_query}"""
+    if context and context.strip():
+        user = f"PDF Context:\n{context}\n\nQuestion: {user_query}\n\nAnswer strictly based on the PDF Context above."
     else:
-        user_prompt = f"User Question: {user_query}"
-    
+        user = f"Question: {user_query}\n\nNote: No PDF context was found. If the answer is not in your documents, reply 'I cannot find an answer in the provided documents.'"
+
     return [
-        {'role': 'system', 'content': sys_prompt},
-        {'role': 'user', 'content': user_prompt}
+        {"role": "system", "content": system},
+        {"role": "user", "content": user},
     ]
